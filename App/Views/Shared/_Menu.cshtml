@@ -1,0 +1,14 @@
+﻿<a asp-controller="Home" asp-action="Index">[Home]</a>
+@{
+    System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+    if (!User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Admin" asp-action="Index">[Secured Zone]</a>
+    }
+    else
+    {
+        <a asp-controller="Admin" asp-action="Administrator">[Administrator]</a>
+        <a asp-controller="Admin" asp-action="Client">[Client]</a>
+        <a asp-controller="Admin" asp-action="Logout">[Logout]</a>
+    }
+}

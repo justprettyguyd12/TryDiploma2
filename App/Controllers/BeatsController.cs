@@ -86,7 +86,7 @@ public class BeatsController : Controller
         var beat = _mapper.Map<Beat>(beatModel);
         beat.SectionId = sectionId;
         _beatService.Create(beat);
-        return Ok($"Добавлен бит {beat.Name} \nв воронку {_sectionService.Get(sectionId)!.Funnel.Name}");
+        return Ok($"Добавлен бит {beat.Name} \nв секцию {_sectionService.Get(sectionId)!.Funnel.Name}");
     }
 
     /// <summary>

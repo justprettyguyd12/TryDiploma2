@@ -1,0 +1,12 @@
+﻿@using System.Security.Claims
+<p>
+    IsAuthenticated : @User.Identity?.IsAuthenticated
+</p>
+
+<p>
+    Name : @User.Identity?.Name
+</p>
+
+<p>
+    Role : @User.Claims.FirstOrDefault(r => r.Type == ClaimTypes.Role)?.Value
+</p>

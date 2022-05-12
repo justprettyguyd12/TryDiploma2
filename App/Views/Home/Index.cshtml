@@ -1,0 +1,22 @@
+﻿@{
+    var scriptUrl = $"/bundle/main.bundle.js";
+    var styleUrl = $"/bundle/main.bundle.css";
+}
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <link rel="preload" as="script" href="@scriptUrl" asp-append-version="true"/>
+    <link rel="preload" as="style" href="@styleUrl" asp-append-version="true"/>
+    <title>Home</title>
+</head>
+<body>
+<div id="root">
+    <h1>Home</h1>
+    <partial name="_Menu" />
+    <partial name="_UserInfo" />
+</div>
+
+<script src="@scriptUrl" asp-append-version="true"></script>
+</body>
+</html>

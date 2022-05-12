@@ -4,6 +4,7 @@ using DataAccess.Models.Crm;
 using Domain.Models;
 using Domain.Models.Crm;
 using TryDiploma.ViewModel;
+using TryDiploma.ViewModel.ClientModels;
 using TryDiploma.ViewModel.DealModels;
 using TryDiploma.ViewModel.FunnelModels;
 using TryDiploma.ViewModel.SectionModels;
@@ -18,7 +19,7 @@ public class AutoMapperProfile : Profile
         CreateMap<AddSectionModel, Section>();
         CreateMap<UpdateSectionModel, Section>();
         CreateMap<AddBeatModel, Beat>().ReverseMap();
-        // CreateMap<ClientEntity, Client>().ReverseMap();
+        CreateMap<AddClientModel, Client>();
         // CreateMap<ContractEntity, Contract>().ReverseMap();
         CreateMap<AddDealModel, Deal>();
         // CreateMap<ShoppingBagEntity, ShoppingBag>().ReverseMap();
