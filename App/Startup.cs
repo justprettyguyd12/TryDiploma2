@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
-using DataAccess;
 using DataAccess.Services;
 using Domain.Models;
 using Domain.Models.Crm;
@@ -92,6 +91,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapFallbackToController("Index", "Home");
         });
     }
 }

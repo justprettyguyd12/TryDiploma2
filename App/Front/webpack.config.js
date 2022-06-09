@@ -11,6 +11,7 @@ const publicDirectory = path.resolve(__dirname, 'public');
 const wwwrootDirectory = path.resolve(__dirname, '../wwwroot/bundle');
 const nodeModulesDirectory = path.resolve(__dirname, 'node_modules');
 
+
 module.exports = {
   entry: './src/entry/plain.tsx',
   output: {
@@ -29,6 +30,7 @@ module.exports = {
         test: /\.(tsx|ts)$/,
         exclude: [nodeModulesDirectory],
         use: ['babel-loader', 'ts-loader'],
+        
       },
       {
         test: /\.s[ca]ss$/,
@@ -51,13 +53,15 @@ module.exports = {
         include: srcDirectory,
         use: ['file-loader'],
       },
+      { 
+        test: /\.css$/, 
+        use: [ 'style-loader', 'css-loader' ] 
+      }
     ],
   },
   plugins: [
     new webpackConfig.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
+      'process.env.NODE_ENV' : JSON.stringify('development')
     }),
     new webpackConfig.ProvidePlugin({
       process: 'process/browser',
@@ -68,8 +72,10 @@ module.exports = {
       ignoreOrder: true,
       chunkFilename: '[name].[chunkhash].chunk.css',
     }),
+    new webpackConfig.HotModuleReplacementPlugin(),
   ],
   target: ['web', 'es5'],
+  mode: 'development'
 };
 
 function cssLoaders() {

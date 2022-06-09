@@ -20,6 +20,12 @@ public class AdminController : Controller
         _userManager = userManager;
         _signInManager = signInManager;
     }
+
+    [HttpGet]
+    public bool? IsAuthenticated()
+    {
+        return @User.Identity?.IsAuthenticated;
+    }
     
     [HttpGet]
     [Authorize]
@@ -46,7 +52,7 @@ public class AdminController : Controller
     [AllowAnonymous]
     public IActionResult Login(string returnUrl)
     {
-        return View();
+        return Ok();
     }
     
     [HttpPost]
@@ -82,8 +88,8 @@ public class AdminController : Controller
     [AllowAnonymous]
     public IActionResult Register(RegisterViewModel model)
     {
-        if (!ModelState.IsValid) 
-            return View(model);
+        if (!ModelState.IsValid)
+            return BadRequest("Заполнено некорректно");
 
         var user = new ApplicationUser();
         user.UserName = model.UserName;

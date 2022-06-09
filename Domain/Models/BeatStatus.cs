@@ -4,5 +4,5 @@ public enum BeatStatus
 {
     InSale,
     InLease,
-    IsSale
+    Sold
 }

@@ -95,7 +95,7 @@ public class BeatsController : Controller
     /// <param name="beatModel">Модель бита с доступными данными</param>
     /// <param name="id">Guid обновляемого бита</param>
     /// <returns>Сообщит, что бит с таким-то названием обновлен</returns>
-    [HttpPut("id:Guid")]
+    [HttpPut("{id:Guid}")]
     public ActionResult<Beat> Put(UpdateBeatModel beatModel, Guid id)
     {
         var beat = _beatService.Get(id);

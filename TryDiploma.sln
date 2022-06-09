@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{0B5DCD40-E8D0-41D8-A205-7AC5366FCF5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractParser", "ContractParser\ContractParser.csproj", "{C6AC94EC-B5DB-41AF-ACE7-B0F1F1A3F250}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{0B5DCD40-E8D0-41D8-A205-7AC5366FCF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B5DCD40-E8D0-41D8-A205-7AC5366FCF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B5DCD40-E8D0-41D8-A205-7AC5366FCF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6AC94EC-B5DB-41AF-ACE7-B0F1F1A3F250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6AC94EC-B5DB-41AF-ACE7-B0F1F1A3F250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6AC94EC-B5DB-41AF-ACE7-B0F1F1A3F250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6AC94EC-B5DB-41AF-ACE7-B0F1F1A3F250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
