@@ -14,10 +14,36 @@ function postBag(bag: Bag): Promise<void> {
     }).then();
 }
 
-//TODO пересмотреть контроллер корзины, доделать API
+function addBeatToBag(beat: BeatToBag): Promise<void> {
+    return fetch(`${baseUrl}`, {
+        method: 'PUT',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(beat)
+    }).then();
+}
+
+function deleteBeatToBag(beat: BeatToBag): Promise<void> {
+    return fetch(`${baseUrl}`, {
+        method: 'DELETE',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(beat)
+    }).then();
+}
+
+export const bagApi = {
+    getBag,
+    postBag,
+    addBeatToBag,
+    deleteBeatToBag
+} as const;
 
 export interface Bag{
     Id: Guid;
     ClientId: Guid;
     Beats: Beat[];
+}
+
+export interface BeatToBag{
+    BeatId: Guid,
+    BagID: Guid
 }

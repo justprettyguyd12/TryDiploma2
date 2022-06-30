@@ -1,6 +1,6 @@
 const baseUrl = '/beats';
 
-function getBeat(id: Guid): Promise<Beat>{
+function getBeat(id: Guid): Promise<JSON>{
     return fetch(`${baseUrl}/${id}`).then(x => x.json());
 }
 
@@ -49,17 +49,17 @@ export const beatsApi = {
 } as const;
 
 export interface Beat{
-    Id: Guid;
-    SectionId: Guid;
-    Name: string;
-    Description: string;
-    PathToDemo: string;
-    PathToWav: string;
-    PathToTrackout: string;
-    PriceToBuy: number;
-    PriceToLease: number;
-    Bpm: number;
-    Status: BeatStatus;
+    id: Guid;
+    sectionId: Guid;
+    name: string;
+    description: string;
+    pathToDemo: string;
+    pathToWav: string;
+    pathToTrackout: string;
+    priceToBuy: number;
+    priceToLease: number;
+    bpm: number;
+    status: BeatStatus;
 }
 
 export enum BeatStatus{

@@ -8,13 +8,7 @@ public static class Program
 {
     private static void Main(string[] args)
     {
-        var host = CreateHostBuilder(args).Build();
-        using (var scope = host.Services.CreateScope())
-        {
-            Databaseinitializer.Init(scope.ServiceProvider);
-        }
-        host.Run();
-        
+        CreateHostBuilder(args).Build().Run();
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>

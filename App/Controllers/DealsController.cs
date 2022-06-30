@@ -95,7 +95,7 @@ public class DealsController : Controller
         var deal = _dealService.Get(id);
         if (deal is null)
             return BadRequest("Секции нема");
-        UpdateSection(dealModel, deal);
+        UpdateDeal(dealModel, deal);
         _dealService.Update(deal);
         return Ok("Обновлена сделка: \n" + deal.Id);
     }
@@ -112,7 +112,7 @@ public class DealsController : Controller
         return Ok($"Сделка {id} удалена");
     }
 
-    private void UpdateSection(UpdateDealModel dealModel, Deal deal)
+    private void UpdateDeal(UpdateDealModel dealModel, Deal deal)
     {
         deal.BeatId = dealModel.BeatId;
         deal.ContractId = dealModel.ContractId;

@@ -11,7 +11,4 @@ public class LoginViewModel
     [Required]
     [Display(Name = "Password")]
     public string Password { get; init; } = null!;
-
-    [Required]
-    public string ReturnUrl { get; init; } = null!;
 }

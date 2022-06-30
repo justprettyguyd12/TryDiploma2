@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TryDiploma.Data.Entities;
-using TryDiploma.ViewModel;
 using TryDiploma.ViewModel.AccountModels;
 
 namespace TryDiploma.Controllers.Accounts;
@@ -57,39 +56,39 @@ public class AdminController : Controller
     
     [HttpPost]
     [AllowAnonymous]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login([FromBody]LoginViewModel model)
     {
         if (!ModelState.IsValid) 
-            return View(model);
+            return BadRequest("Форма заполнена некорректно");
 
         var user = await _userManager.FindByNameAsync(model.UserName);
         if (user == null)
         {
             ModelState.AddModelError("", "User not found");
-            return View(model);
+            return BadRequest("Пользователь не найден");
         }
 
         var result = _signInManager.PasswordSignInAsync(user, model.Password, false, false)
             .GetAwaiter().GetResult();
         if (result.Succeeded)
-            return Redirect(model.ReturnUrl);
+            return Ok();
 
-        return View(model);
+        return BadRequest("Пароль неверный");
     }
     
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult Register()
+    public RegisterViewModel Register()
     {
-        return View();
+        return new RegisterViewModel();
     }
     
     [HttpPost]
     [AllowAnonymous]
-    public IActionResult Register(RegisterViewModel model)
+    public IActionResult Register([FromBody]RegisterViewModel model)
     {
         if (!ModelState.IsValid)
-            return BadRequest("Заполнено некорректно");
+            return BadRequest(ModelState.GetValidationState(""));
 
         var user = new ApplicationUser();
         user.UserName = model.UserName;
@@ -101,7 +100,7 @@ public class AdminController : Controller
         _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Client")).GetAwaiter().GetResult();
         _signInManager.PasswordSignInAsync(user, model.Password, false, false)
             .GetAwaiter().GetResult();
-        return Redirect("Index");
+        return Redirect("/Home/Index");
     }
 
     [HttpGet]

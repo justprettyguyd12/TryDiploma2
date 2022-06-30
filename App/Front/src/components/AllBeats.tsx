@@ -1,5 +1,7 @@
 import React from "react";
-import {Table} from "reactstrap";
+import {NavLink, Table} from "reactstrap";
+import ReactAudioPlayer from "react-audio-player";
+import {Link} from "react-router-dom";
 
 export const AllBeats: React.FC = ({}) => {
     const [beats, setBeats] = React.useState<Beat[]>()
@@ -11,9 +13,10 @@ export const AllBeats: React.FC = ({}) => {
     return(
         <>
             <h3 style={{textAlign: "center"}}>Все биты</h3>
-            <Table>
+            <Table >
                 <thead>
                 <tr>
+                    <th> </th>
                     <th>Название</th>
                     <th>Цена за эксклюзив</th>
                     <th>Цена за лизинг</th>
@@ -23,12 +26,17 @@ export const AllBeats: React.FC = ({}) => {
                 <tbody>
                 {
                     beats?.map((b) => (
-                        <tr key={b.id}>
-                            <td>{b.name}</td>
-                            <td>{b.priceToBuy}</td>
-                            <td>{b.priceToLease}</td>
-                            <td>{b.bpm}</td>
-                        </tr>
+                            <tr key={b.id}>
+                                <td>
+                                    <ReactAudioPlayer src={`beats/${b.name}/demo/${b.name.toLowerCase()} demo.mp3`} controls/>
+                                </td>
+                                <td>
+                                    <Link className="text-dark" style={{ textDecoration: 'none' }} to={`beats/${b.id}`}>{b.name}</Link>
+                                </td>
+                                <td>{b.priceToBuy}</td>
+                                <td>{b.priceToLease}</td>
+                                <td>{b.bpm}</td>
+                            </tr>
                     ))
                 }
                 </tbody>
@@ -37,14 +45,14 @@ export const AllBeats: React.FC = ({}) => {
     )
 
     function getBeats() : Promise<Beat[]>{
-        return fetch('/beats').then(x => x.json())
+        return fetch('/beats').then(x => x.json());
     }
+}
 
-    interface Beat {
-        id: Guid;
-        name: string;
-        priceToBuy: number;
-        priceToLease: number;
-        bpm: number;
-    }
+export interface Beat {
+    id: Guid;
+    name: string;
+    priceToBuy: number;
+    priceToLease: number;
+    bpm: number;
 }

@@ -1,10 +1,14 @@
 import React from "react";
 import {Alert, Button, FormGroup, Input, Label} from "reactstrap";
+import {useNavigate} from "react-router-dom";
 
 export const RegisterForm: React.FC = ({}) => {
     const [username, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
+
+    const navigate = useNavigate();
+    const goHome = () => navigate('/');
     
     const onRegister = () => {
         const model: RegisterModel = {
@@ -12,7 +16,8 @@ export const RegisterForm: React.FC = ({}) => {
             password,
             confirmPassword
         };
-        return postRegister(model);
+        postRegister(model);
+        goHome();
     }
     
     return (
@@ -46,12 +51,11 @@ function postRegister(model: RegisterModel)
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(model)
-        }).then(r => {
-            if (!r.ok){
-                return <Alert color="danger">{r.text()}</Alert>
-            }
-    });
+        }
+    );
 }
+
+//TODO сделать так, чтоб это всё работало
 
 interface RegisterModel{
     username: string;

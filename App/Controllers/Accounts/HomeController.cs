@@ -9,8 +9,6 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var userClaims = User.Claims.FirstOrDefault(r => r.Type == ClaimTypes.Role);
-        ViewBag.Role = userClaims?.Value!;
         return View();
     }
 

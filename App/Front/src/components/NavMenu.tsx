@@ -14,12 +14,11 @@ export const NavMenu: React.FC = ({}) => {
     return (
         <header>
             <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow-3 mb-3" container={true} light>
-                    <NavbarBrand tag={Link} to="/">Beatstore крутого саундпродюссера</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/">Very cool beatstore</NavbarBrand>
                     <NavbarToggler onClick={toggleNavbar} className="mr-2" />
                     <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={collapsed} navbar>
                         <Nav className="navbar-nav flex-grow">
-                            <LoginMenu isAuthenticated={true}>
-                            </LoginMenu>
+                            <LoginMenu> </LoginMenu>
                         </Nav>
                     </Collapse>
             </Navbar>

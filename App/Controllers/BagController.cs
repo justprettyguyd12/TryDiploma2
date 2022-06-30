@@ -21,7 +21,7 @@ public class BagController : Controller
         _beatService = beatService;
         _userManager = userManager;
     }
-
+    
     /// <summary>
     /// Получить корзину пользователя (не протестировано)
     /// </summary>

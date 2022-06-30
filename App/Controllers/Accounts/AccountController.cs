@@ -1,4 +1,6 @@
 ﻿using System.Security.Claims;
+using DataAccess.Services;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TryDiploma.Data.Entities;
@@ -11,10 +13,12 @@ namespace TryDiploma.Controllers.Accounts;
 public class AccountController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IService<ShoppingBag> _bagManager;
 
-    public AccountController(UserManager<ApplicationUser> userManager)
+    public AccountController(UserManager<ApplicationUser> userManager, IService<ShoppingBag> bagManager)
     {
         _userManager = userManager;
+        _bagManager = bagManager;
     }
 
     /// <summary>
@@ -44,22 +48,27 @@ public class AccountController : Controller
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<ActionResult<ApplicationUser>> Create(RegisterViewModel model)
+    public Task<ActionResult<ApplicationUser>> Create(RegisterViewModel model)
     {
         if (!ModelState.IsValid)
-            return BadRequest("Шо то не то с моделькой");
+            return Task.FromResult<ActionResult<ApplicationUser>>(BadRequest("Шо то не то с моделькой"));
         
         var user = new ApplicationUser();
         user.UserName = model.UserName;
-        //TODO создать и добавить корзину
-        //BagId = 
-
+        
+        //TODO chack later
+        var bag = new ShoppingBag();
+        bag.ClientId = user.Id;
+        user.BagId = bag.Id;
+        _bagManager.Create(bag);
+        //
+        
         var result = _userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
         if (!result.Succeeded) 
-            return BadRequest("Не удалось зарегистрировать юзера");
+            return Task.FromResult<ActionResult<ApplicationUser>>(BadRequest("Не удалось зарегистрировать юзера"));
         
         _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Client")).GetAwaiter().GetResult();
-        return Ok($"Пользователь {model.UserName} создан");
+        return Task.FromResult<ActionResult<ApplicationUser>>(Ok($"Пользователь {model.UserName} создан"));
     }
 
     /// <summary>
